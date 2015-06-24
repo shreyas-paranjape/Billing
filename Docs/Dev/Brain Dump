@@ -2,22 +2,34 @@ Authorization
 --------------
 
 . Consumer
+	Pay bill
+	Download yearly billing history
 
 . Meter reader
+	Download Bill cycle data
+	Take readings
+	Upload Bill cycle data.
 
 . Operator
+	CRUD consumer, connection, Meter reader, Device
 
 . Supervisor - linked to sub division
+	View reports of sub - division
 
 . Manager - same as supervisor for entire area
+	View reports
 
 . System Admin
+	CRUD System users
 
 . PWD Head
+	View reports of entire state
 
 . PWD division Head
+	View reports of division
 
 . PWD Subdivision Head
+	View reports of sub - division
 
 
 Reports
@@ -29,4 +41,10 @@ Reports
 
 . Billing cycle reports
 
-. 
+.
+
+
+Fault
+------
+
+. There are meter fault and meter reading fault  

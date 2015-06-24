@@ -48,42 +48,6 @@ CREATE TABLE IF NOT EXISTS `dbo`.`MeterSizes` (
   PRIMARY KEY (`MeterSizeID`));
 
 -- ----------------------------------------------------------------------------
--- Table dbo.Religion
--- ----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbo`.`Religion` (
-  `ReligionID` INT NOT NULL,
-  `Religion` VARCHAR(50) NOT NULL,
-  `Description` VARCHAR(150) NULL,
-  `UserID` INT NOT NULL,
-  `DTStamp` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`ReligionID`),
-  CONSTRAINT `FK__Religion__UserID__01142BA1`
-    FOREIGN KEY (`UserID`)
-    REFERENCES `dbo`.`Users` (`UserID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FK__Religion__UserID__44CA3770`
-    FOREIGN KEY (`UserID`)
-    REFERENCES `dbo`.`Users` (`UserID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
--- ----------------------------------------------------------------------------
--- Table dbo.Reservoir
--- ----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbo`.`Reservoir` (
-  `TappingID` VARCHAR(2) NOT NULL,
-  `ReservoirID` VARCHAR(2) NOT NULL,
-  `SchemeID` INT NOT NULL,
-  `Description` VARCHAR(50) NULL DEFAULT '',
-  PRIMARY KEY (`TappingID`, `ReservoirID`, `SchemeID`),
-  CONSTRAINT `FK_Reservoir_Tapping`
-    FOREIGN KEY (`SchemeID` , `TappingID`)
-    REFERENCES `dbo`.`Tapping` (`SchemeID` , `TappingID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
-
--- ----------------------------------------------------------------------------
 -- Table dbo.MeterConn
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbo`.`MeterConn` (
@@ -276,6 +240,87 @@ CREATE TABLE IF NOT EXISTS `dbo`.`Ward` (
     ON UPDATE NO ACTION);
 
 -- ----------------------------------------------------------------------------
+-- Table dbo.Zone
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbo`.`Zone` (
+  `ZoneID` INT NOT NULL,
+  `ZoneSHName` VARCHAR(20) NOT NULL,
+  `ZoneLName` VARCHAR(50) NOT NULL,
+  `SubDivID` INT NOT NULL,
+  `Description` VARCHAR(500) NULL,
+  `UserID` INT NOT NULL,
+  `DTStamp` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `ConstituencyID` INT NULL,
+  `UrbanRural` TINYINT(1) NULL,
+  `SchemeId` INT NULL,
+  `ZoneVill` VARCHAR(100) NULL,
+  `ZoneJE` VARCHAR(100) NULL,
+  PRIMARY KEY (`ZoneID`),
+  CONSTRAINT `FK__Zone__Constituen__09A971A2`
+    FOREIGN KEY (`ConstituencyID`)
+    REFERENCES `dbo`.`GeneralMaster` (`GenID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK__Zone__SubDivID__0A9D95DB`
+    FOREIGN KEY (`SubDivID`)
+    REFERENCES `dbo`.`Division` (`DivID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK__Zone__UserID__0B91BA14`
+    FOREIGN KEY (`UserID`)
+    REFERENCES `dbo`.`Users` (`UserID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK__Zone__Constituen__4D5F7D71`
+    FOREIGN KEY (`ConstituencyID`)
+    REFERENCES `dbo`.`GeneralMaster` (`GenID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK__Zone__SubDivID__4E53A1AA`
+    FOREIGN KEY (`SubDivID`)
+    REFERENCES `dbo`.`Division` (`DivID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK__Zone__UserID__4F47C5E3`
+    FOREIGN KEY (`UserID`)
+    REFERENCES `dbo`.`Users` (`UserID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+-- ----------------------------------------------------------------------------
+-- Table dbo.Division
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbo`.`Division` (
+  `DivID` INT NOT NULL,
+  `DivSHName` VARCHAR(20) NOT NULL,
+  `DivLName` VARCHAR(50) NOT NULL,
+  `PDivID` INT NULL,
+  `Description` VARCHAR(500) NULL,
+  `UserID` INT NOT NULL,
+  `DTStamp` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`DivID`),
+  CONSTRAINT `FK__Division__PDivID__3E1D39E1`
+    FOREIGN KEY (`PDivID`)
+    REFERENCES `dbo`.`Division` (`DivID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK__Division__UserID__3F115E1A`
+    FOREIGN KEY (`UserID`)
+    REFERENCES `dbo`.`Users` (`UserID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK__Division__PDivID__73BA3083`
+    FOREIGN KEY (`PDivID`)
+    REFERENCES `dbo`.`Division` (`DivID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `FK__Division__UserID__74AE54BC`
+    FOREIGN KEY (`UserID`)
+    REFERENCES `dbo`.`Users` (`UserID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION);
+
+-- ----------------------------------------------------------------------------
 -- Table dbo.DataDownload
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbo`.`DataDownload` (
@@ -362,53 +407,6 @@ CREATE TABLE IF NOT EXISTS `dbo`.`DataDownload` (
   `IssueTime1` DATETIME NULL,
   PRIMARY KEY (`DownLoadID`));
 
--- ----------------------------------------------------------------------------
--- Table dbo.Zone
--- ----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbo`.`Zone` (
-  `ZoneID` INT NOT NULL,
-  `ZoneSHName` VARCHAR(20) NOT NULL,
-  `ZoneLName` VARCHAR(50) NOT NULL,
-  `SubDivID` INT NOT NULL,
-  `Description` VARCHAR(500) NULL,
-  `UserID` INT NOT NULL,
-  `DTStamp` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `ConstituencyID` INT NULL,
-  `UrbanRural` TINYINT(1) NULL,
-  `SchemeId` INT NULL,
-  `ZoneVill` VARCHAR(100) NULL,
-  `ZoneJE` VARCHAR(100) NULL,
-  PRIMARY KEY (`ZoneID`),
-  CONSTRAINT `FK__Zone__Constituen__09A971A2`
-    FOREIGN KEY (`ConstituencyID`)
-    REFERENCES `dbo`.`GeneralMaster` (`GenID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FK__Zone__SubDivID__0A9D95DB`
-    FOREIGN KEY (`SubDivID`)
-    REFERENCES `dbo`.`Division` (`DivID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FK__Zone__UserID__0B91BA14`
-    FOREIGN KEY (`UserID`)
-    REFERENCES `dbo`.`Users` (`UserID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FK__Zone__Constituen__4D5F7D71`
-    FOREIGN KEY (`ConstituencyID`)
-    REFERENCES `dbo`.`GeneralMaster` (`GenID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FK__Zone__SubDivID__4E53A1AA`
-    FOREIGN KEY (`SubDivID`)
-    REFERENCES `dbo`.`Division` (`DivID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FK__Zone__UserID__4F47C5E3`
-    FOREIGN KEY (`UserID`)
-    REFERENCES `dbo`.`Users` (`UserID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
 
 -- ----------------------------------------------------------------------------
 -- Table dbo.ObjectMst
@@ -432,90 +430,14 @@ CREATE TABLE IF NOT EXISTS `dbo`.`UserRights` (
   `CanDel` TINYINT(1) NULL,
   PRIMARY KEY (`UserSHName`, `ObjectTypeCd`, `ObjectCd`));
 
--- ----------------------------------------------------------------------------
--- Table dbo.Report_Metr_Size
--- ----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbo`.`Report_Metr_Size` (
-  `Year` VARCHAR(50) NULL,
-  `Mtr15mm` INT NULL,
-  `Mtr20mm` INT NULL,
-  `Mtr20_25mm` INT NULL,
-  `Mtr25_50mm` INT NULL,
-  `Mtr50_mm` INT NULL,
-  `Cons_Type` VARCHAR(50) NULL,
-  `zoneid` VARCHAR(50) NULL);
 
--- ----------------------------------------------------------------------------
--- Table dbo.Report_UnitsBilled_CatWise
--- ----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbo`.`Report_UnitsBilled_CatWise` (
-  `catcode` VARCHAR(50) NULL,
-  `units` BIGINT NULL,
-  `catshortname` VARCHAR(50) NULL,
-  `zoneid` VARCHAR(20) NULL,
-  `Year` VARCHAR(20) NULL,
-  `consid` INT NULL);
-
--- ----------------------------------------------------------------------------
--- Table dbo.Report_Arrears_CatWise
--- ----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbo`.`Report_Arrears_CatWise` (
-  `catcode` VARCHAR(50) NULL,
-  `arrears` BIGINT NULL,
-  `catshortname` VARCHAR(50) NULL,
-  `zoneid` VARCHAR(20) NULL);
-
--- ----------------------------------------------------------------------------
--- Table dbo.Report_Arrears_yearWise
--- ----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbo`.`Report_Arrears_yearWise` (
-  `consname` VARCHAR(150) NULL,
-  `address` VARCHAR(250) NULL,
-  `year` VARCHAR(5) NULL,
-  `catcode` VARCHAR(50) NULL,
-  `arrears` BIGINT NULL,
-  `catshortname` VARCHAR(50) NULL,
-  `zoneid` VARCHAR(20) NULL);
-
--- ----------------------------------------------------------------------------
--- Table dbo.TMPCYCLES
--- ----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbo`.`TMPCYCLES` (
-  `ZONEID` INT NULL,
-  `CYCLEID` INT NULL);
-
--- ----------------------------------------------------------------------------
--- Table dbo.TmpReport
--- ----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbo`.`TmpReport` (
-  `CONSCATID` INT NULL,
-  `CATCODE` VARCHAR(50) NULL,
-  `CATRGRP` INT NULL,
-  `TOTCONSCOUNT` BIGINT NULL,
-  `CATSHNAME` VARCHAR(100) NULL,
-  `WATERCHRG` BIGINT NULL,
-  `SEWAGECHRG` BIGINT NULL,
-  `METERRENT` BIGINT NULL,
-  `SUNDRYCHRG` BIGINT NULL,
-  `PERDAYUNITS` BIGINT NULL,
-  `TOTALUNITS` BIGINT NULL,
-  `ARRCREDIT` BIGINT NULL,
-  `BILLAMT` BIGINT NULL,
-  `GROUPID` INT NULL,
-  `SR_NO` INT NULL,
-  `OPEN_ARR` BIGINT NOT NULL,
-  `CLOSE_ARR` BIGINT NULL,
-  `DPC` BIGINT NULL,
-  `PAIDAMT` BIGINT NULL,
-  `TOTALFAULTS` INT NULL,
-  `TOTREPLACED` INT NULL);
 
 -- ----------------------------------------------------------------------------
 -- Table dbo.Bill
 -- ----------------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbo`.`Bill` (
-  `CycleID` INT NOT NULL DEFAULT 0,
-  `BillID` BIGINT NOT NULL AUTO_INCREMENT,
+  `CycleID` INT NOT NULL DEFAULT 0, 
+  `BillID` BIGINT NOT NULL AUTO_INCREMENT, 
   `ZoneId` INT NULL,
   `BillNumber` VARCHAR(4) NOT NULL,
   `ConsID` INT NULL,
@@ -774,38 +696,7 @@ CREATE TABLE IF NOT EXISTS `dbo`.`ConsumerTypes` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
--- ----------------------------------------------------------------------------
--- Table dbo.Division
--- ----------------------------------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbo`.`Division` (
-  `DivID` INT NOT NULL,
-  `DivSHName` VARCHAR(20) NOT NULL,
-  `DivLName` VARCHAR(50) NOT NULL,
-  `PDivID` INT NULL,
-  `Description` VARCHAR(500) NULL,
-  `UserID` INT NOT NULL,
-  `DTStamp` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`DivID`),
-  CONSTRAINT `FK__Division__PDivID__3E1D39E1`
-    FOREIGN KEY (`PDivID`)
-    REFERENCES `dbo`.`Division` (`DivID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FK__Division__UserID__3F115E1A`
-    FOREIGN KEY (`UserID`)
-    REFERENCES `dbo`.`Users` (`UserID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FK__Division__PDivID__73BA3083`
-    FOREIGN KEY (`PDivID`)
-    REFERENCES `dbo`.`Division` (`DivID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `FK__Division__UserID__74AE54BC`
-    FOREIGN KEY (`UserID`)
-    REFERENCES `dbo`.`Users` (`UserID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+
 
 -- ----------------------------------------------------------------------------
 -- Table dbo.GeneralMaster

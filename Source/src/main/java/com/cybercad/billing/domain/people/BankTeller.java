@@ -1,5 +1,8 @@
 package com.cybercad.billing.domain.people;
 
-public class BankTeller {
+import com.cybercad.billing.domain.comms.CommunicationDetails;
 
+public class BankTeller {
+	private PersonalDetails personalDetails;
+	private CommunicationDetails communicationDetails;
 }

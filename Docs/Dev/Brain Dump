@@ -1,5 +1,5 @@
 Authorization
---------------
+-------------
 
 . Consumer
 	Pay bill
@@ -33,7 +33,7 @@ Authorization
 
 
 Reports
---------
+-------
 
 . System reports -
 
@@ -45,6 +45,16 @@ Reports
 
 
 Fault
-------
+-----
 
 . There are meter fault and meter reading fault  
+
+
+Bill cycle
+----------
+
+. Every meter reader has a bill cycle which signifies the number of bills issued by him. The bill cycles need not be in sync.
+
+. Customer will not receive another bill for a period less then 25 days.
+
+. Customer has 15 days to pay the bill once issued.

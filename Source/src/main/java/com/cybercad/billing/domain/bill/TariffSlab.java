@@ -11,7 +11,5 @@ public class TariffSlab {
 	private float minCharges;
 	private Date effectiveDate;
 	
-	
-	
 
 }

@@ -1,12 +1,14 @@
 package com.cybercad.billing.domain.geoclass;
 
-import java.util.List;
+import java.util.Set;
 
-import com.cybercad.billing.domain.people.Consumer;
+import com.cybercad.billing.domain.conn.Connection;
 import com.cybercad.billing.domain.people.MeterReader;
 
 public class Ward {
+
 	private SubDivision division;
-	private List<Consumer> consumers;
+	private Set<Connection> connections;
 	private MeterReader meterReader;
+
 }

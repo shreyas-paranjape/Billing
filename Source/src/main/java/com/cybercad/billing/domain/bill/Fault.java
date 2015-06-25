@@ -1,13 +1,5 @@
 package com.cybercad.billing.domain.bill;
 
-public enum Fault {
+public class Fault extends Reading {
 
-	METER_NOT_WORKING() {
-		@Override
-		public boolean isMeterFault() {
-			return true;
-		}
-	};
-
-	public abstract boolean isMeterFault();
 }

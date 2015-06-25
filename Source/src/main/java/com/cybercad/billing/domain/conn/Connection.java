@@ -7,9 +7,11 @@ import com.cybercad.billing.domain.people.Consumer;
 public class Connection {
 
 	private String code;
-	private Consumer consumer;
 	private int minUnits;
 	private Meter activeMeter;
 	private Ward ward;
+
+	private Consumer consumer;
+	private ConnectionType connectionType;
 
 }

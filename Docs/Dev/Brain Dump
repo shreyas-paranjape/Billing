@@ -41,9 +41,6 @@ Reports
 
 . Billing cycle reports
 
-.
-
-
 Fault
 -----
 
@@ -58,3 +55,25 @@ Bill cycle
 . Customer will not receive another bill for a period less then 25 days.
 
 . Customer has 15 days to pay the bill once issued.
+
+
+
+Components needed
+-----------------
+
+. Export service : Export to excel,pdf
+
+. Notification service : Email, SMS, App notification
+
+. Sync service for app : Over network, Using a file, 
+
+. Authentication and authorization service
+
+. Print service : bluetooth and USB
+
+. Event logging service : Log important events to DB
+
+. Archival service: Periodically backup and clear database
+
+
+

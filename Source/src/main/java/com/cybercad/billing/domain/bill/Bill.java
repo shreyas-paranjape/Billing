@@ -10,7 +10,7 @@ public class Bill extends Reading {
 	public static int BILL_PAYMENT_PERIOD = 14;
 
 	private Connection connection;
-	private BillingCycle billingCycle;
+	private ReadingCycle billingCycle;
 
 	private double WaterCharge;
 	private double sundryCharge;

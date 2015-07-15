@@ -9,7 +9,7 @@ public class TariffSlab {
 	private int toUnit;
 	private float tariff;
 	private float minCharges;
-	private Date effectiveDate;
+	
 	
 
 }

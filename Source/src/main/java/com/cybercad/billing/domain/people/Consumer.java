@@ -13,6 +13,7 @@ public class Consumer {
 	private CommunicationDetails communicationDetails;
 
 	private String consumerCode;
+	
 	private Set<Connection> connections;
 	private int members;
 

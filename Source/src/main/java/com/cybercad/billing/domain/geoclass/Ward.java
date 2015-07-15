@@ -5,7 +5,7 @@ import java.util.Set;
 import com.cybercad.billing.domain.conn.Connection;
 import com.cybercad.billing.domain.people.MeterReader;
 
-public class Ward {
+public class Ward extends GeoClass {
 
 	private SubDivision division;
 	private Set<Connection> connections;

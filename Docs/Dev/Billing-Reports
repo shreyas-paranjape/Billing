@@ -1,0 +1,54 @@
+-------- Consumer
+
+. All
+
+-------- Connections
+
+. Grouped by
+	Connection type
+	Meter type
+	Admin_Type (Panchayat, Muncipal council)
+	Constituency
+	PWD class (Division, Sub-division, Zone, Ward)
+	Meter reader
+. All
+
+. All active
+
+. Last billed report
+
+. Not billed since {date}
+	Get all connections not billed since a specified date
+
+. With arreas
+
+--------- Connection
+
+. Billing history
+	. Readings
+	. Faults
+
+. Payment history
+
+. Details : Connection type, Meter type, Location
+
+. Meter change history
+
+. Connection type change history
+
+
+--------- Meter reader
+
+. Alloted connections
+
+. Reading statistics: 
+	Number_read  : Daily, Weekly, Monthly, On demand 
+	Number_read, Number_days : Read cycle
+
+. Allocated devices
+
+
+
+
+
+

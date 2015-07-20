@@ -1,6 +1,6 @@
 package com.cybercad.billing.domain.conn;
 
-import com.cybercad.billing.domain.bill.TarrifClass;
+import com.cybercad.billing.domain.tariff.TarrifClass;
 
 public class ConnectionType {
 

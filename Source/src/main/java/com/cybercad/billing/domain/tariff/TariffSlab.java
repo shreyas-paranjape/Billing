@@ -1,4 +1,4 @@
-package com.cybercad.billing.domain.bill;
+package com.cybercad.billing.domain.tariff;
 
 import java.util.Date;
 

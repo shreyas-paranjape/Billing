@@ -1,3 +1,11 @@
+-------- Monthly
+
+. Ledger : Units billed during the month, Payment recieved during the month
+
+. Summary
+
+
+
 -------- Consumer
 
 . All
@@ -46,6 +54,11 @@
 	Number_read, Number_days : Read cycle
 
 . Allocated devices
+
+
+---------- Meter
+
+. Faulty meters
 
 
 

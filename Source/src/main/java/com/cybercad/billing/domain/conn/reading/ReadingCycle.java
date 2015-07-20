@@ -1,4 +1,4 @@
-package com.cybercad.billing.domain.bill;
+package com.cybercad.billing.domain.conn.reading;
 
 import java.util.Date;
 import java.util.Set;
@@ -10,7 +10,7 @@ public class ReadingCycle {
 	private int number;
 	private Date startDate;
 	private Date endDate;
-	private Set<Reading> readings;
+	private Set<ConnectionReading> readings;
 	private MeterReader meterReader;
 
 }

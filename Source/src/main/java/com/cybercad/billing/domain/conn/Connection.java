@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.cybercad.billing.domain.devices.Meter;
-import com.cybercad.billing.domain.geoclass.Ward;
 import com.cybercad.billing.domain.people.Consumer;
 
 /**
@@ -25,13 +24,13 @@ public class Connection {
 	private String code;
 	private boolean active;
 	private int minUnits;
-	private double currentReading;
-	private double currentBalance;
 
-	private Meter activeMeter;
-	private Ward ward;
 	private Consumer consumer;
 	private ConnectionType connectionType;
+	private Meter activeMeter;
+
+	private double currentBalance;
+	private double currentReading;
 
 	public Long getId() {
 		return id;
@@ -87,14 +86,6 @@ public class Connection {
 
 	public void setActiveMeter(Meter activeMeter) {
 		this.activeMeter = activeMeter;
-	}
-
-	public Ward getWard() {
-		return ward;
-	}
-
-	public void setWard(Ward ward) {
-		this.ward = ward;
 	}
 
 	public Consumer getConsumer() {

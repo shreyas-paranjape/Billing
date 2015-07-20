@@ -4,8 +4,6 @@ import java.util.Set;
 
 import com.cybercad.billing.domain.comms.CommunicationDetails;
 import com.cybercad.billing.domain.conn.Connection;
-import com.cybercad.billing.domain.conn.ConnectionType;
-import com.cybercad.billing.domain.geoclass.Ward;
 
 public class Consumer {
 

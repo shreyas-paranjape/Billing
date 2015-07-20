@@ -3,22 +3,26 @@ package com.cybercad.billing.domain.bill;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.cybercad.billing.domain.conn.Connection;
+import com.cybercad.billing.domain.conn.payment.ConnectionPayment;
+import com.cybercad.billing.domain.conn.reading.ConnectionReading;
 
-public class Bill extends Reading {
+public class Bill {
 
 	public static int BILL_PAYMENT_PERIOD = 14;
 
-	private Connection connection;
-	private ReadingCycle billingCycle;
+	// Unique for a zone
+	private int billNumber;
 
-	private double WaterCharge;
+	private ConnectionReading reading;
+	private ConnectionPayment payment;
+
+	private double waterCharge;
 	private double sundryCharge;
+	private double meterRent;
+
 	private Date issueDate;
 	private Date fromDate;
 	private Date toDate;
-	// Unique for a zone
-	private int billNumber;
 
 	public Date getDueDate() {
 		Calendar dueDate = Calendar.getInstance();
@@ -26,5 +30,9 @@ public class Bill extends Reading {
 		dueDate.add(Calendar.DAY_OF_YEAR, BILL_PAYMENT_PERIOD);
 		return dueDate.getTime();
 	}
-	
+
+	public double getTotalCharge() {
+		return waterCharge + sundryCharge + meterRent;
+	}
+
 }

@@ -31,6 +31,7 @@ public class Connection {
 
 	private double currentBalance;
 	private double currentReading;
+	private long currentAverage;
 
 	public Long getId() {
 		return id;
@@ -102,6 +103,14 @@ public class Connection {
 
 	public void setConnectionType(ConnectionType connectionType) {
 		this.connectionType = connectionType;
+	}
+
+	public long getCurrentAverage() {
+		return currentAverage;
+	}
+
+	public void setCurrentAverage(long currentAverage) {
+		this.currentAverage = currentAverage;
 	}
 
 }

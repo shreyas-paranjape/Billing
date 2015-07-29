@@ -5,6 +5,10 @@ public class MeterType {
 	private String name;
 	private String description;
 	private int size;
-	private double rent;
+	private float rent;
+
+	public float getMeterRent(int period) {
+		return rent * period;
+	}
 
 }

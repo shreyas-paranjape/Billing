@@ -23,15 +23,10 @@ public class Connection {
 
 	private String code;
 	private boolean active;
-	private int minUnits;
-
 	private Consumer consumer;
 	private ConnectionType connectionType;
+	private ConnectionStatus connectionStatus;
 	private Meter activeMeter;
-
-	private double currentBalance;
-	private double currentReading;
-	private long currentAverage;
 
 	public Long getId() {
 		return id;
@@ -55,30 +50,6 @@ public class Connection {
 
 	public void setActive(boolean active) {
 		this.active = active;
-	}
-
-	public int getMinUnits() {
-		return minUnits;
-	}
-
-	public void setMinUnits(int minUnits) {
-		this.minUnits = minUnits;
-	}
-
-	public double getCurrentReading() {
-		return currentReading;
-	}
-
-	public void setCurrentReading(double currentReading) {
-		this.currentReading = currentReading;
-	}
-
-	public double getCurrentBalance() {
-		return currentBalance;
-	}
-
-	public void setCurrentBalance(double currentBalance) {
-		this.currentBalance = currentBalance;
 	}
 
 	public Meter getActiveMeter() {
@@ -105,12 +76,17 @@ public class Connection {
 		this.connectionType = connectionType;
 	}
 
-	public long getCurrentAverage() {
-		return currentAverage;
+	public long getMinUnits() {
+		return Math.min(connectionStatus.getCurrentAverage(),
+				getConnectionType().getMinUnits());
 	}
 
-	public void setCurrentAverage(long currentAverage) {
-		this.currentAverage = currentAverage;
+	public ConnectionStatus getConnectionStatus() {
+		return connectionStatus;
+	}
+
+	public void setConnectionStatus(ConnectionStatus connectionStatus) {
+		this.connectionStatus = connectionStatus;
 	}
 
 }

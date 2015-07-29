@@ -1,6 +1,5 @@
 package com.cybercad.billing.domain.tariff;
 
-
 public class TariffSlab {
 
 	private String code;
@@ -15,6 +14,10 @@ public class TariffSlab {
 
 	public float getSlabCharges() {
 		return getSlabLength() * tariff;
+	}
+
+	public float getCharges(float units) {
+		return units * getTariff();
 	}
 
 	public float getTariff() {

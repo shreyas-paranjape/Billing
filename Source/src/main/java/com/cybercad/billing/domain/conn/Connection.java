@@ -1,9 +1,14 @@
 package com.cybercad.billing.domain.conn;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.cybercad.billing.domain.devices.Meter;
 import com.cybercad.billing.domain.people.Consumer;
@@ -14,16 +19,27 @@ import com.cybercad.billing.domain.people.Consumer;
  *         Represents a service that needs to be billed
  *
  */
-@Entity
+//@Entity
+//@Table(name="connection")
 public class Connection {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@Id@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-
 	private String code;
 	private boolean active;
-	private Consumer consumer;
+
+//	@OneToMany(mappedBy = "connection")
+//	private Set<ConsumerConnection> consConnection;
+	//	private Consumer consumer;
+
+	public Connection() {
+		super();
+	}
+	
+	public Connection(String code) {
+		super();
+		this.code = code;
+	}
+
 	private ConnectionType connectionType;
 	private ConnectionStatus connectionStatus;
 	private Meter activeMeter;
@@ -59,14 +75,14 @@ public class Connection {
 	public void setActiveMeter(Meter activeMeter) {
 		this.activeMeter = activeMeter;
 	}
-
-	public Consumer getConsumer() {
-		return consumer;
-	}
-
-	public void setConsumer(Consumer consumer) {
-		this.consumer = consumer;
-	}
+//
+//	public Consumer getConsumer() {
+//		return consumer;
+//	}
+//
+//	public void setConsumer(Consumer consumer) {
+//		this.consumer = consumer;
+//	}
 
 	public ConnectionType getConnectionType() {
 		return connectionType;
@@ -76,7 +92,7 @@ public class Connection {
 		this.connectionType = connectionType;
 	}
 
-	public long getMinUnits() {
+	public long calculateMinUnits() {
 		return Math.min(connectionStatus.getCurrentAverage(),
 				getConnectionType().getMinUnits());
 	}

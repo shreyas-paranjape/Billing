@@ -1,0 +1,25 @@
+<project name="springapp" basedir="." default="gen_hibernate">
+
+	<taskdef name="hibernatetool"
+			classname="org.hibernate.tool.ant.HibernateToolTask"> 
+			<classpath>
+				<fileset dir="lib">
+					<include name="**/*.jar"/>
+				</fileset>
+			</classpath>
+	</taskdef> 
+
+	<target name="gen_hibernate"
+			description="generate hibernate classes">
+		<hibernatetool>
+			<jdbcconfiguration
+				configurationfile="hibernate.cfg.xml"
+				packagename="com.cybercad.billing.domain" 
+				revengfile="rev_eng.xml" 
+				detectmanytomany="true"
+			/>
+			<hbm2java jdk5="true" ejb3="true" destdir="src" />
+		</hibernatetool>
+	</target>
+
+</project>

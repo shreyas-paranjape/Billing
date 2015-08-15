@@ -24,7 +24,7 @@ import com.cybercad.billing.repository.MessageRepository;
 
 @Configuration
 @EnableAutoConfiguration
-//@EnableTransactionManagement
+@EnableTransactionManagement
 @PropertySource({ "classpath:hibernate.properties" })
 @ComponentScan(basePackages = { "com.cybercad.billing" })
 public class Application implements CommandLineRunner {
@@ -42,7 +42,7 @@ public class Application implements CommandLineRunner {
 	@Autowired
 	private Environment env;
 
-	//@Bean
+	@Bean
 	public DataSource dataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
@@ -52,7 +52,7 @@ public class Application implements CommandLineRunner {
 		return dataSource;
 	}
 
-	//@Bean
+	@Bean
 	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
 		sessionFactory.setDataSource(dataSource());
@@ -62,14 +62,14 @@ public class Application implements CommandLineRunner {
 		return sessionFactory;
 	}
 
-	//@Bean
+	@Bean
 	public HibernateTransactionManager transactionManager() {
 		HibernateTransactionManager txManager = new HibernateTransactionManager();
 		txManager.setSessionFactory(sessionFactory().getObject());
 		return txManager;
 	}
 
-	//@Bean
+	@Bean
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}

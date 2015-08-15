@@ -3,8 +3,8 @@ package com.cybercad.billing.domain.bill;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.cybercad.billing.domain.conn.payment.ConnectionPayment;
-import com.cybercad.billing.domain.conn.reading.ConnectionReading;
+import com.cybercad.billing.domain.conn.payment.ConnPayment;
+import com.cybercad.billing.domain.conn.reading.ConnReading;
 
 public class Bill {
 
@@ -13,8 +13,8 @@ public class Bill {
 	// Unique for a zone
 	private int billNumber;
 
-	private ConnectionReading reading;
-	private ConnectionPayment payment;
+	private ConnReading reading;
+	private ConnPayment payment;
 
 	private double waterCharge;
 	private double sundryCharge;

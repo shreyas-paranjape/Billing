@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -24,18 +25,15 @@ import com.cybercad.billing.domain.Religion;
 @Entity
 @Table(name="consumer"
 ,catalog="billing"
-, uniqueConstraints = @UniqueConstraint(columnNames="cons_code") 
 		)
 public class Consumer  implements java.io.Serializable {
 	private int id;
 	private String consCode;
 	private Set<ConsConn> consConns = new HashSet<ConsConn>(0);
-	@ManyToOne
 	private Prefix prefix;
 	private String consumerName;
 	private long mobile;
 	private String email;
-	@ManyToOne
 	private Religion religion;
 	public Consumer() {
 	}
@@ -77,7 +75,7 @@ public class Consumer  implements java.io.Serializable {
 	}
 
 
-	@Column(name="cons_code", unique=true, nullable=false, length=10)
+	@Column(name="cons_code", nullable=false, length=10)
 	public String getConsCode() {
 		return this.consCode;
 	}
@@ -91,14 +89,6 @@ public class Consumer  implements java.io.Serializable {
 		return this.consConns;
 	}
 
-	public Prefix getPrefix() {
-		return prefix;
-	}
-
-
-	public void setPrefix(Prefix prefix) {
-		this.prefix = prefix;
-	}
 
 
 	public String getConsumerName() {
@@ -131,22 +121,31 @@ public class Consumer  implements java.io.Serializable {
 	}
 
 
-	public Religion getReligion() {
-		return religion;
-	}
-
-
-	public void setReligion(Religion religion) {
-		this.religion = religion;
-	}
-
-
 	public void setConsConns(Set<ConsConn> consConns) {
 		this.consConns = consConns;
 	}
 
+	@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="prefix_id", nullable=false)
+    public Prefix getPrefix() {
+        return this.prefix;
+    }
+    
+    public void setPrefix(Prefix prefix) {
+        this.prefix = prefix;
+    }
 
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="religion_id", nullable=false)
+    public Religion getReligion() {
+        return this.religion;
+    }
+    
+    public void setReligion(Religion religion) {
+        this.religion = religion;
+    }
 
+    
 
 }
 

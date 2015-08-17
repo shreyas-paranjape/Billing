@@ -33,7 +33,6 @@ import com.cybercad.billing.domain.devices.Meter;
 @Entity
 @Table(name="connection"
     ,catalog="billing"
-    , uniqueConstraints = @UniqueConstraint(columnNames="conn_code") 
 )
 public class Connection  implements java.io.Serializable {
 

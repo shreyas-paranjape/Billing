@@ -26,7 +26,8 @@ import com.cybercad.billing.domain.conn.Connection;
 		)
 public class Meter  implements java.io.Serializable {
 
-
+	private static final long serialVersionUID = 1L;
+	
 	private int id;
 	private MeterType meterType;
 	private String meterNumber;

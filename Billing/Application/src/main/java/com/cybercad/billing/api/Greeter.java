@@ -9,15 +9,16 @@ import com.cybercad.billing.domain.conn.Connection;
 @RequestMapping("/api")
 public class Greeter {
 
-	//@Autowired
-	//MessageRepository messageService;
+	// @Autowired
+	// MessageRepository messageService;
 
 	@RequestMapping("/")
 	public Connection greet() {
-		/*for (Message msg : messageService.findByText("first")) {
-			if (msg.getNextMessage() != null)
-				return msg.getNextMessage().getText();
-		}*/
-		return new Connection("dgfdgfrydjyyhfr");
+		/*
+		 * for (Message msg : messageService.findByText("first")) { if
+		 * (msg.getNextMessage() != null) return msg.getNextMessage().getText();
+		 * }
+		 */
+		return new Connection();
 	}
 }

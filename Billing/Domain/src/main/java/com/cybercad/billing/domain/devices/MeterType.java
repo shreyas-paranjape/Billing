@@ -1,5 +1,5 @@
 package com.cybercad.billing.domain.devices;
-// Generated 13 Aug, 2015 2:58:27 AM by Hibernate Tools 3.2.4.GA
+// Generated 23 Sep, 2015 4:46:26 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.HashSet;
@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,18 +26,22 @@ public class MeterType  implements java.io.Serializable {
 
 
      private Integer id;
+     private MeterRent meterRent;
      private String description;
      private String size;
-     private String rent;
      private Set<Meter> meters = new HashSet<Meter>(0);
 
     public MeterType() {
     }
 
-    public MeterType(String description, String size, String rent, Set<Meter> meters) {
+	
+    public MeterType(MeterRent meterRent) {
+        this.meterRent = meterRent;
+    }
+    public MeterType(MeterRent meterRent, String description, String size, Set<Meter> meters) {
+       this.meterRent = meterRent;
        this.description = description;
        this.size = size;
-       this.rent = rent;
        this.meters = meters;
     }
    
@@ -49,6 +55,16 @@ public class MeterType  implements java.io.Serializable {
     
     public void setId(Integer id) {
         this.id = id;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="meter_rent_id", nullable=false)
+    public MeterRent getMeterRent() {
+        return this.meterRent;
+    }
+    
+    public void setMeterRent(MeterRent meterRent) {
+        this.meterRent = meterRent;
     }
 
     
@@ -69,16 +85,6 @@ public class MeterType  implements java.io.Serializable {
     
     public void setSize(String size) {
         this.size = size;
-    }
-
-    
-    @Column(name="rent", length=45)
-    public String getRent() {
-        return this.rent;
-    }
-    
-    public void setRent(String rent) {
-        this.rent = rent;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="meterType")

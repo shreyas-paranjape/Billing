@@ -1,5 +1,5 @@
 package com.cybercad.billing.domain.devices;
-// Generated 13 Aug, 2015 2:58:27 AM by Hibernate Tools 3.2.4.GA
+// Generated 23 Sep, 2015 4:46:26 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.Date;
@@ -14,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.cybercad.billing.domain.conn.Connection;
 
@@ -22,80 +24,171 @@ import com.cybercad.billing.domain.conn.Connection;
  */
 @Entity
 @Table(name="meter"
-,catalog="billing"
-		)
+    ,catalog="billing"
+)
 public class Meter  implements java.io.Serializable {
 
-	private static final long serialVersionUID = 1L;
+
+     private int id;
+     private MeterType meterType;
+     private Connection connection;
+     private String meterNumber;
+     private Date lastUpdated;
+     private Double secDeposit;
+     private Date effectiveDate;
+     private Date closeDate;
+     private Integer initialReading;
+     private boolean ownMeter;
+     private Boolean active;
+     private Set<MeterConditionHistory> meterConditionHistories = new HashSet<MeterConditionHistory>(0);
+
+    public Meter() {
+    }
+
 	
-	private int id;
-	private MeterType meterType;
-	private String meterNumber;
-	private Set<Connection> connections = new HashSet<Connection>(0);
+    public Meter(int id, MeterType meterType, Connection connection, Date lastUpdated, Date effectiveDate, boolean ownMeter) {
+        this.id = id;
+        this.meterType = meterType;
+        this.connection = connection;
+        this.lastUpdated = lastUpdated;
+        this.effectiveDate = effectiveDate;
+        this.ownMeter = ownMeter;
+    }
+    public Meter(int id, MeterType meterType, Connection connection, String meterNumber, Date lastUpdated, Double secDeposit, Date effectiveDate, Date closeDate, Integer initialReading, boolean ownMeter, Boolean active, Set<MeterConditionHistory> meterConditionHistories) {
+       this.id = id;
+       this.meterType = meterType;
+       this.connection = connection;
+       this.meterNumber = meterNumber;
+       this.lastUpdated = lastUpdated;
+       this.secDeposit = secDeposit;
+       this.effectiveDate = effectiveDate;
+       this.closeDate = closeDate;
+       this.initialReading = initialReading;
+       this.ownMeter = ownMeter;
+       this.active = active;
+       this.meterConditionHistories = meterConditionHistories;
+    }
+   
+     @Id 
 
+    
+    @Column(name="id", unique=true, nullable=false)
+    public int getId() {
+        return this.id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	private Date effectiveDate;
-	private Date disconnectionDate;
-	private int initialReading;
-	private boolean isOwnMeter;
-	@ManyToOne
-	private MeterStatus status;
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="meter_type_id", nullable=false)
+    public MeterType getMeterType() {
+        return this.meterType;
+    }
+    
+    public void setMeterType(MeterType meterType) {
+        this.meterType = meterType;
+    }
 
-	public Meter() {
-	}
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="connection_id", nullable=false)
+    public Connection getConnection() {
+        return this.connection;
+    }
+    
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
 
+    
+    @Column(name="meter_number", length=45)
+    public String getMeterNumber() {
+        return this.meterNumber;
+    }
+    
+    public void setMeterNumber(String meterNumber) {
+        this.meterNumber = meterNumber;
+    }
 
-	public Meter(int id, MeterType meterType) {
-		this.id = id;
-		this.meterType = meterType;
-	}
-	public Meter(int id, MeterType meterType, String meterNumber, Set<Connection> connections) {
-		this.id = id;
-		this.meterType = meterType;
-		this.meterNumber = meterNumber;
-		this.connections = connections;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="last_updated", nullable=false, length=19)
+    public Date getLastUpdated() {
+        return this.lastUpdated;
+    }
+    
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
 
-	@Id 
+    
+    @Column(name="sec_deposit", precision=22, scale=0)
+    public Double getSecDeposit() {
+        return this.secDeposit;
+    }
+    
+    public void setSecDeposit(Double secDeposit) {
+        this.secDeposit = secDeposit;
+    }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="effective_date", nullable=false, length=19)
+    public Date getEffectiveDate() {
+        return this.effectiveDate;
+    }
+    
+    public void setEffectiveDate(Date effectiveDate) {
+        this.effectiveDate = effectiveDate;
+    }
 
-	@Column(name="id", unique=true, nullable=false)
-	public int getId() {
-		return this.id;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="close_date", length=19)
+    public Date getCloseDate() {
+        return this.closeDate;
+    }
+    
+    public void setCloseDate(Date closeDate) {
+        this.closeDate = closeDate;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    
+    @Column(name="initial_reading")
+    public Integer getInitialReading() {
+        return this.initialReading;
+    }
+    
+    public void setInitialReading(Integer initialReading) {
+        this.initialReading = initialReading;
+    }
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="meter_type_id", nullable=false)
-	public MeterType getMeterType() {
-		return this.meterType;
-	}
+    
+    @Column(name="own_meter", nullable=false)
+    public boolean isOwnMeter() {
+        return this.ownMeter;
+    }
+    
+    public void setOwnMeter(boolean ownMeter) {
+        this.ownMeter = ownMeter;
+    }
 
-	public void setMeterType(MeterType meterType) {
-		this.meterType = meterType;
-	}
+    
+    @Column(name="active")
+    public Boolean getActive() {
+        return this.active;
+    }
+    
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
-
-	@Column(name="meter_number", length=45)
-	public String getMeterNumber() {
-		return this.meterNumber;
-	}
-
-	public void setMeterNumber(String meterNumber) {
-		this.meterNumber = meterNumber;
-	}
-
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="meter")
-	public Set<Connection> getConnections() {
-		return this.connections;
-	}
-
-	public void setConnections(Set<Connection> connections) {
-		this.connections = connections;
-	}
+@OneToMany(fetch=FetchType.LAZY, mappedBy="meter")
+    public Set<MeterConditionHistory> getMeterConditionHistories() {
+        return this.meterConditionHistories;
+    }
+    
+    public void setMeterConditionHistories(Set<MeterConditionHistory> meterConditionHistories) {
+        this.meterConditionHistories = meterConditionHistories;
+    }
 
 
 

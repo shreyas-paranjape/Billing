@@ -1,5 +1,5 @@
 package com.cybercad.billing.domain.tariff;
-// Generated 13 Aug, 2015 2:58:27 AM by Hibernate Tools 3.2.4.GA
+// Generated 23 Sep, 2015 4:46:26 PM by Hibernate Tools 3.2.4.GA
 
 
 import javax.persistence.Column;
@@ -15,117 +15,109 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="tariff_slab"
-,catalog="billing"
-		)
+    ,catalog="billing"
+)
 public class TariffSlab  implements java.io.Serializable {
 
 
-	private int id;
-	private TariffClass tariffClass;
-	private String code;
-	private Integer fromUnit;
-	private Integer toUnit;
-	private Double tariff;
-	private Double minCharges;
+     private int id;
+     private TariffClass tariffClass;
+     private String code;
+     private Integer fromUnit;
+     private Integer toUnit;
+     private Double tariff;
+     private Double minCharges;
 
-	public TariffSlab() {
-	}
+    public TariffSlab() {
+    }
 
+	
+    public TariffSlab(int id, TariffClass tariffClass) {
+        this.id = id;
+        this.tariffClass = tariffClass;
+    }
+    public TariffSlab(int id, TariffClass tariffClass, String code, Integer fromUnit, Integer toUnit, Double tariff, Double minCharges) {
+       this.id = id;
+       this.tariffClass = tariffClass;
+       this.code = code;
+       this.fromUnit = fromUnit;
+       this.toUnit = toUnit;
+       this.tariff = tariff;
+       this.minCharges = minCharges;
+    }
+   
+     @Id 
 
-	public TariffSlab(int id, TariffClass tariffClass) {
-		this.id = id;
-		this.tariffClass = tariffClass;
-	}
-	public TariffSlab(int id, TariffClass tariffClass, String code, Integer fromUnit, Integer toUnit, Double tariff, Double minCharges) {
-		this.id = id;
-		this.tariffClass = tariffClass;
-		this.code = code;
-		this.fromUnit = fromUnit;
-		this.toUnit = toUnit;
-		this.tariff = tariff;
-		this.minCharges = minCharges;
-	}
+    
+    @Column(name="id", unique=true, nullable=false)
+    public int getId() {
+        return this.id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	@Id     
-	@Column(name="id", unique=true, nullable=false)
-	public int getId() {
-		return this.id;
-	}
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="tariff_class_id", nullable=false)
+    public TariffClass getTariffClass() {
+        return this.tariffClass;
+    }
+    
+    public void setTariffClass(TariffClass tariffClass) {
+        this.tariffClass = tariffClass;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    
+    @Column(name="code", length=45)
+    public String getCode() {
+        return this.code;
+    }
+    
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="tariff_class_id", nullable=false)
-	public TariffClass getTariffClass() {
-		return this.tariffClass;
-	}
+    
+    @Column(name="from_unit")
+    public Integer getFromUnit() {
+        return this.fromUnit;
+    }
+    
+    public void setFromUnit(Integer fromUnit) {
+        this.fromUnit = fromUnit;
+    }
 
-	public void setTariffClass(TariffClass tariffClass) {
-		this.tariffClass = tariffClass;
-	}
+    
+    @Column(name="to_unit")
+    public Integer getToUnit() {
+        return this.toUnit;
+    }
+    
+    public void setToUnit(Integer toUnit) {
+        this.toUnit = toUnit;
+    }
 
+    
+    @Column(name="tariff", precision=22, scale=0)
+    public Double getTariff() {
+        return this.tariff;
+    }
+    
+    public void setTariff(Double tariff) {
+        this.tariff = tariff;
+    }
 
-	@Column(name="code", length=45)
-	public String getCode() {
-		return this.code;
-	}
+    
+    @Column(name="min_charges", precision=22, scale=0)
+    public Double getMinCharges() {
+        return this.minCharges;
+    }
+    
+    public void setMinCharges(Double minCharges) {
+        this.minCharges = minCharges;
+    }
 
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-
-	@Column(name="from_unit")
-	public Integer getFromUnit() {
-		return this.fromUnit;
-	}
-
-	public void setFromUnit(Integer fromUnit) {
-		this.fromUnit = fromUnit;
-	}
-
-
-	@Column(name="to_unit")
-	public Integer getToUnit() {
-		return this.toUnit;
-	}
-
-	public void setToUnit(Integer toUnit) {
-		this.toUnit = toUnit;
-	}
-
-
-	@Column(name="tariff", precision=22, scale=0)
-	public Double getTariff() {
-		return this.tariff;
-	}
-
-	public void setTariff(Double tariff) {
-		this.tariff = tariff;
-	}
-
-
-	@Column(name="min_charges", precision=22, scale=0)
-	public Double getMinCharges() {
-		return this.minCharges;
-	}
-
-	public void setMinCharges(Double minCharges) {
-		this.minCharges = minCharges;
-	}
-//	public int getSlabLength() {
-//		return toUnit - fromUnit;
-//	}
-
-//	public double getSlabCharges() {
-//		return getSlabLength() * tariff;
-//	}
-
-	public double getCharges(float units) {
-		return units * getTariff();
-	}
 
 
 

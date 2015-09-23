@@ -1,17 +1,14 @@
 package com.cybercad.billing.domain.conn.payment;
-// Generated 13 Aug, 2015 2:58:27 AM by Hibernate Tools 3.2.4.GA
+// Generated 23 Sep, 2015 4:46:26 PM by Hibernate Tools 3.2.4.GA
 
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -28,14 +25,14 @@ public class PaymentType  implements java.io.Serializable {
 
      private Integer id;
      private String desciption;
-     private Set<ConnPayment> connPayments = new HashSet<ConnPayment>(0);
+     private Set<Payment> payments = new HashSet<Payment>(0);
 
     public PaymentType() {
     }
 
-    public PaymentType(String desciption, Set<ConnPayment> connPayments) {
+    public PaymentType(String desciption, Set<Payment> payments) {
        this.desciption = desciption;
-       this.connPayments = connPayments;
+       this.payments = payments;
     }
    
      @Id @GeneratedValue(strategy=IDENTITY)
@@ -61,12 +58,12 @@ public class PaymentType  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="paymentType")
-    public Set<ConnPayment> getConnPayments() {
-        return this.connPayments;
+    public Set<Payment> getPayments() {
+        return this.payments;
     }
     
-    public void setConnPayments(Set<ConnPayment> connPayments) {
-        this.connPayments = connPayments;
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
     }
 
 

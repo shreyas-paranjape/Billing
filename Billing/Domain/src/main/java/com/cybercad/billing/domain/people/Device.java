@@ -1,12 +1,14 @@
-package com.cybercad.billing.domain;
-// Generated 13 Aug, 2015 2:58:27 AM by Hibernate Tools 3.2.4.GA
+package com.cybercad.billing.domain.people;
+// Generated 23 Sep, 2015 4:46:26 PM by Hibernate Tools 3.2.4.GA
 
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -24,6 +26,7 @@ public class Device  implements java.io.Serializable {
 
      private Integer id;
      private MeterReader meterReader;
+     private int userId;
      private String type;
      private String code;
 
@@ -31,11 +34,13 @@ public class Device  implements java.io.Serializable {
     }
 
 	
-    public Device(MeterReader meterReader) {
+    public Device(MeterReader meterReader, int userId) {
         this.meterReader = meterReader;
+        this.userId = userId;
     }
-    public Device(MeterReader meterReader, String type, String code) {
+    public Device(MeterReader meterReader, int userId, String type, String code) {
        this.meterReader = meterReader;
+       this.userId = userId;
        this.type = type;
        this.code = code;
     }
@@ -60,6 +65,16 @@ public class Device  implements java.io.Serializable {
     
     public void setMeterReader(MeterReader meterReader) {
         this.meterReader = meterReader;
+    }
+
+    
+    @Column(name="User_id", nullable=false)
+    public int getUserId() {
+        return this.userId;
+    }
+    
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     

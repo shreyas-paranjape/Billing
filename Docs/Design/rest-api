@@ -1,0 +1,66 @@
+http://localhost:8080/api
+
+	/connection
+		GET	: {}				: fetch all rows
+		POST	: {json}			: create a new row
+	
+	/connection/conn_id
+		GET	: {}				: GET all details
+		PUT	: {json}			: update details
+		DELETE	: {}				: set the deleted flag to true
+
+	/constituency
+		GET	: {}				: fetch all rows
+		POST	: {json}			: create a new row
+	
+	/constituency/constituency_id
+		GET	: {}				: GET all details
+		PUT	: {json}			: update details
+		DELETE	: {}				: set the deleted flag to true
+
+	/religion
+		GET	: {}				: fetch all rows
+		POST	: {json}			: create a new row
+	
+	/religion/religion_id
+		GET	: {}				: GET all details
+		PUT	: {json}			: update details
+		DELETE	: {}				: set the deleted flag to true
+
+	/prefix
+		GET	: {}				: fetch all rows
+		POST	: {json}			: create a new row
+	
+	/prefix/prefix_id
+		GET	: {}				: GET all details
+		PUT	: {json}			: update details
+		DELETE	: {}				: set the deleted flag to true
+
+	/consumer
+		GET	: {}				: fetch all rows
+		POST	: {json}			: create a new row
+	
+	/consumer/cons_id
+		GET	: {}				: GET all details
+		PUT	: {json}			: update details
+		DELETE	: {}				: set the deleted flag to true
+
+
+	/meter_reader
+		GET	: {}				: fetch all rows
+		POST	: {json}			: create a new row
+	
+	/meter_reader/meter_reader_id
+		GET	: {}				: GET all details
+		PUT	: {json}			: update details
+		DELETE	: {}				: set the deleted flag to true
+
+	/fault
+		GET	: {}				: fetch all rows
+		POST	: {json}			: create a new row
+	
+	/fault/fault_id
+		GET	: {}				: GET all details
+		PUT	: {json}			: update details
+		DELETE	: {}				: set the deleted flag to true
+
